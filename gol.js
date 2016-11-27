@@ -131,8 +131,17 @@ $(document).ready(function() {
  *           Updates backgroundColor of cell in HTML table.
  */
 function setCellState(state, grid, row, col) {
-    // TODO: implement
+  if (state == "alive") {
+  grid[row][col].isAlive = true;
+  getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.aliveColor);
 }
+
+else {
+  grid[row][col].isAlive = false;
+  getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.aliveColor);
+}
+}
+
 
 
 /**
@@ -144,7 +153,89 @@ function setCellState(state, grid, row, col) {
  *           the cell at row, col in grid and returns the count.
  */
 function countLiveNeighbors(grid, row, col) {
-    // TODO: implement
+  var livers = 0;
+    var tl;
+    var tm;
+    var tr;
+    var ml;
+    var mm;
+    var mr;
+    var bl;
+    var bm;
+    var br;
+
+    if (row - 1 < 0) {
+    tl = false;
+    tm = false;
+    tr = false;
+    }
+
+    if (row + 1 >= Constants.numberOfRows) {
+        bl = false;
+        bm = false;
+        br = false;
+    }
+
+    if (col - 1 < 0) {
+    tl = false;
+    ml = false;
+    bl = false;
+    }
+
+    if (col + 1 >= Constants.numberOfColumns) {
+    tr = false;
+    mr = false;
+    br = false;
+    }
+
+    if (tl) {
+        if (grid[row - 1][col - 1].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (tm) {
+        if (grid[row - 1][col].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (tr) {
+        if (grid[row - 1][col + 1].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (mr) {
+        if (grid[row][col + 1].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (br) {
+        if (grid[row + 1][col + 1].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (bm) {
+        if (grid[row + 1][col].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (bl) {
+        if (grid[row + 1][col - 1].isAlive == true) {
+        livers++
+        }
+    }
+
+    if (ml) {
+        if (grid[row][col - 1].isAlive == true) {
+        livers++
+        }
+    }
+
 }
 
 
@@ -155,7 +246,12 @@ function countLiveNeighbors(grid, row, col) {
  * Effects:  Updates the liveNeighbors field of each cell in grid
  */
 function updateLiveNeighbors(grid) {
-    // TODO: implement
+    for (var i = 0; i < Constants.numberOfRows; i++) {
+        for (var j = 0; j < Constants.numberOfColumns; j++) {
+            grid[i][j].liveNeighbors = countLiveNeighbors(grid, i, j);
+        }
+    }
+
 }
 
 /**
@@ -192,7 +288,8 @@ function evolveStep(grid) {
  *           Draws the pattern specified by patternName.
  */
 function drawPattern(patternName, grid, row, col) {
-    // TODO: implement
+  drawStillLife(patternName, grid, row, col);
+  drawOscillator(patternName, grid, row, col);
 }
 
 /**
@@ -207,7 +304,101 @@ function drawPattern(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawStillLife(patternName, grid, row, col) {
-    // TODO: implement
+  if (patternName == "Loaf") {
+     var colPlusOne = false;
+     var colPlusTwo = false;
+     var colPlusThree = false;
+     var rowPlusOne = false;
+     var rowPlusTwo = false;
+     var rowPlusThree = false;
+
+     // set [row][col + 1] to alive
+     if (col + 1 < Constants.numberOfColumns) {
+         colPlusOne = true;
+           setCellState("alive", grid, row, col+1);
+     }
+
+     // set [row][col + 2] to alive
+     if (col + 2 < Constants.numberOfColumns) {
+         colPlusTwo = true;
+           setCellState("alive", grid, row, col+2);
+     }
+
+     // check [col + 3] is in bounds
+     if (col + 3 < Constants.numberOfColumns) {
+         colPlusThree = true;
+     }
+
+     // set [row + 1][col] to alive
+     if (row + 1 < Constants.numberOfRows) {
+         rowPlusOne = true;
+         setCellState("alive", grid, row+1, col);
+     }
+
+     // set [row + 1][col + 3] to alive
+     if (rowPlusOne && colPlusThree) {
+         setCellState("alive", grid, row+1, col+3);
+     }
+
+     // set [row + 2][col + 1] to alive
+     if (row + 2 < Constants.numberOfRows) {
+         rowPlusTwo = true;
+             if (colPlusOne) {
+                 setCellState("alive", grid, row+2, col+1);
+         }
+     }
+
+     // set [row + 2][col + 3] to alive
+     if (rowPlusTwo && colPlusThree) {
+         setCellState("alive", grid, row+2, col+3);
+     }
+
+     // set [row + 3][col + 2] to alive
+     if (row + 3 < Constants.numberOfRows) {
+         rowPlusThree = true;
+             if (colPlusTwo) {
+                 setCellState("alive", grid, row+3, col+2);
+             }
+     }
+ }
+ if (patternName == "Boat") {
+     var colPlusOne = false;
+     var colPlusTwo = false;
+     var rowPlusOne = false;
+     var rowPlusTwo = false;
+
+     if (col + 1 < Constants.numberOfColumns) {
+         colPlusOne = true;
+     }
+
+
+     if (col + 2 < Constants.numberOfColumns) {
+         colPlusTwo = true;
+     }
+     if (row + 1 < Constants.numberOfRows) {
+         rowPlusOne = true;
+     }
+
+
+     if (row + 2 < Constants.numberOfRows) {
+         rowPlusTwo = true;
+     }
+     setCellState("alive", grid, row, col);
+
+     if(colPlusOne) {
+       setCellState("alive", grid, row, col+1);
+       if(rowPlusTwo) {
+         setCellState("alive", grid, row+2, col+1);
+       }
+     }
+     if(rowPlusOne) {
+       setCellState("alive", grid, row+1, col);
+       if(colPlusTwo) {
+         setCellState("alive", grid, row+1, col+2);
+       }
+     }
+  }
+
 }
 
 
@@ -223,7 +414,309 @@ function drawStillLife(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawOscillator(patternName, grid, row, col) {
-    // TODO: implement
+  if (patternName == "Toad") {
+      var colPlusOne = false;
+      var colPlusTwo = false;
+      var colPlusThree = false;
+      var rowPlusOne = false;
+
+      // set [row][col + 1] to alive
+      if (col + 1 < Constants.numberOfColumns) {
+          colPlusOne = true;
+          setCellState("alive", grid, row, col+1);
+      }
+
+      // set [row][col + 1] to alive
+      if (col + 2 < Constants.numberOfColumns) {
+          colPlusTwo = true;
+          setCellState("alive", grid, row, col+2);
+
+      }
+
+      // set [row][col + 3] to alive
+      if (col + 3 < Constants.numberOfColumns) {
+          colPlusThree = true;
+          setCellState("alive", grid, row, col+3);
+
+      }
+
+      // set[row + 1][col] to alive
+      if (row + 1 < Constants.numberOfRows) {
+          rowPlusOne = true;
+          setCellState("alive", grid, row+1, col);
+
+      }
+
+      // set[row + 1][col + 1] to alive
+      if (rowPlusOne && colPlusOne) {
+          setCellState("alive", grid, row+1, col+1);
+      }
+
+      // set[row + 1][col + 2] to alive
+      if (rowPlusOne && colPlusTwo) {
+        setCellState("alive", grid, row+1, col+2);
+      }
+  }
+  if(patternName == "Pulsar") {
+    var colPlusTwo = false;
+    var colPlusThree = false;
+    var colPlusFour = false;
+    var colPlusFive = false;
+    var colPlusSeven = false;
+    var colPlusEight = false;
+    var colPlusNine = false;
+    var colPlusTen = false;
+    var colPlusTweleve = false;
+    var rowPlusTwo = false;
+    var rowPlusThree = false;
+    var rowPlusFour = false;
+    var rowPlusFive = false;
+    var rowPlusSeven = false;
+    var rowPlusEight = false;
+    var rowPlusNine = false;
+    var rowPlusTen = false;
+    var rowPlusTwelve = false;
+
+    if(col+2<Constants.numberOfColumns) {
+      colPlusTwo = true;
+    }
+
+    if(col+3<Constants.numberOfColumns) {
+      colPlusThree = true;
+    }
+
+    if(col+4<Constants.numberOfColumns) {
+      colPlusFour = true;
+    }
+
+    if(col+5<Constants.numberOfColumns) {
+      colPlusFive = true;
+    }
+
+    if(col+7<Constants.numberOfColumns) {
+      colPlusSeven = true;
+    }
+
+    if(col+8<Constants.numberOfColumns) {
+      colPlusEight = true;
+    }
+
+    if(col+9<Constants.numberOfColumns) {
+      colPlusNine = true;
+    }
+
+    if(col+10<Constants.numberOfColumns) {
+      colPlusTen = true;
+    }
+
+    if(col+12<Constants.numberOfColumns) {
+      colPlusTwelve = true;
+    }
+
+    if(row+2<Constants.numberOfRows) {
+      rowPlusTwo = true;
+    }
+
+    if(row+3<Constants.numberOfRows) {
+      rowPlusThree = true;
+    }
+
+    if(row+4<Constants.numberOfRows) {
+      rowPlusFour = true;
+    }
+
+    if(row+5<Constants.numberOfRows) {
+      rowPlusFive = true;
+    }
+
+    if(row+7<Constants.numberOfRows) {
+      rowPlusSeven = true;
+    }
+
+    if(row+8<Constants.numberOfRows) {
+      rowPlusEight = true;
+    }
+
+    if(row+9<Constants.numberOfRows) {
+      rowPlusNine = true;
+    }
+
+    if(row+10<Constants.numberOfRows) {
+      rowPlusTen = true;
+    }
+
+    if(row+12<Constants.numberOfRows) {
+      rowPlusTwelve = true;
+    }
+
+    if(colPlusTwo) {
+      setCellState("alive", grid, row, col + 2);
+    }
+    if(colPlusThree) {
+      setCellState("alive", grid, row, col + 3);
+    }
+    if(colPlusFour) {
+      setCellState("alive", grid, row, col + 4);
+    }
+    if(colPlusEight) {
+      setCellState("alive", grid, row, col + 8);
+    }
+    if(colPlusNine) {
+      setCellState("alive", grid, row, col + 9);
+    }
+    if(colPlusTen) {
+      setCellState("alive", grid, row, col + 10);
+    }
+    if(rowPlusTwo) {
+      setCellState("alive", grid, row+2, col);
+
+      if(colPlusFive) {
+        setCellState("alive", grid, row+2, col+5);
+      }
+      if(colPlusSeven) {
+        setCellState("alive", grid, row+2, col+7);
+      }
+      if(colPlusTwelve) {
+        setCellState("alive", grid, row+2, col+12);
+      }
+    }
+    if(rowPlusThree) {
+      setCellState("alive", grid, row+3, col);
+
+      if(colPlusFive) {
+        setCellState("alive", grid, row+3, col+5);
+      }
+      if(colPlusSeven) {
+        setCellState("alive", grid, row+3, col+7);
+      }
+      if(colPlusTwelve) {
+        setCellState("alive", grid, row+3, col+12);
+      }
+    }
+
+    if(rowPlusFour) {
+      setCellState("alive", grid, row+4, col);
+
+      if(colPlusFive) {
+        setCellState("alive", grid, row+4, col+5);
+      }
+      if(colPlusSeven) {
+        setCellState("alive", grid, row+4, col+7);
+      }
+      if(colPlusTwelve) {
+        setCellState("alive", grid, row+4, col+12);
+      }
+    }
+
+    if(rowPlusFive) {
+      if(colPlusTwo) {
+        setCellState("alive", grid, row+5, col + 2);
+      }
+      if(colPlusThree) {
+        setCellState("alive", grid, row+5, col + 3);
+      }
+      if(colPlusFour) {
+        setCellState("alive", grid, row+5, col + 4);
+      }
+      if(colPlusEight) {
+        setCellState("alive", grid, row+5, col + 8);
+      }
+      if(colPlusNine) {
+        setCellState("alive", grid, row+5, col + 9);
+      }
+      if(colPlusTen) {
+        setCellState("alive", grid, row+5, col + 10);
+      }
+    }
+
+    if(rowPlusSeven) {
+      if(colPlusTwo) {
+        setCellState("alive", grid, row+7, col + 2);
+      }
+      if(colPlusThree) {
+        setCellState("alive", grid, row+7, col + 3);
+      }
+      if(colPlusFour) {
+        setCellState("alive", grid, row+7, col + 4);
+      }
+      if(colPlusEight) {
+        setCellState("alive", grid, row+7, col + 8);
+      }
+      if(colPlusNine) {
+        setCellState("alive", grid, row+7, col + 9);
+      }
+      if(colPlusTen) {
+        setCellState("alive", grid, row+7, col + 10);
+      }
+    }
+
+    if(rowPlusEight) {
+      setCellState("alive", grid, row+8, col);
+
+      if(colPlusFive) {
+        setCellState("alive", grid, row+8, col+5);
+      }
+      if(colPlusSeven) {
+        setCellState("alive", grid, row+8, col+7);
+      }
+      if(colPlusTwelve) {
+        setCellState("alive", grid, row+8, col+12);
+      }
+    }
+
+    if(rowPlusNine) {
+      setCellState("alive", grid, row+9, col);
+
+      if(colPlusFive) {
+        setCellState("alive", grid, row+9, col+5);
+      }
+      if(colPlusSeven) {
+        setCellState("alive", grid, row+9, col+7);
+      }
+      if(colPlusTwelve) {
+        setCellState("alive", grid, row+9, col+12);
+      }
+    }
+
+    if(rowPlusTen) {
+      setCellState("alive", grid, row+10, col);
+
+      if(colPlusFive) {
+        setCellState("alive", grid, row+10, col+5);
+      }
+      if(colPlusSeven) {
+        setCellState("alive", grid, row+10, col+7);
+      }
+      if(colPlusTwelve) {
+        setCellState("alive", grid, row+10, col+12);
+      }
+    }
+
+    if(rowPlusTwelve) {
+      if(colPlusTwo) {
+        setCellState("alive", grid, row+12, col + 2);
+      }
+      if(colPlusThree) {
+        setCellState("alive", grid, row+12, col + 3);
+      }
+      if(colPlusFour) {
+        setCellState("alive", grid, row+12, col + 4);
+      }
+      if(colPlusEight) {
+        setCellState("alive", grid, row+12, col + 8);
+      }
+      if(colPlusNine) {
+        setCellState("alive", grid, row+12, col + 9);
+      }
+      if(colPlusTen) {
+        setCellState("alive", grid, row+12, col + 10);
+      }
+    }
+
+
+  }
+
+
 }
 
 
@@ -239,5 +732,46 @@ function drawOscillator(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawSpaceship(patternName, grid, row, col) {
-    // TODO: implement
+  if (patternName == "Glider") {
+     var colPlusOne = false;
+     var colPlusTwo = false;
+     var rowPlusOne = false;
+     var rowPlusTwo = false;
+
+     // set [row][col + 1] to alive
+     if (col + 1 < Constants.numberOfColumns) {
+         colPlusOne = true;
+         grid[row][col + 1].isAlive = true;
+     }
+
+     // check [col + 2] is valid
+     if (col + 2 < Constants.numberOfColumns) {
+         colPlusTwo = true;
+     }
+
+     // set [row + 1][col + 2] to alive
+     if (row + 1 < Constants.numberOfRows) {
+         rowPlusOne = true;
+             if (colPlusTwo == true) {
+                 grid[row + 1][col + 2].isAlive = true;
+             }
+     }
+
+     // set [row + 2][col] to alive
+     if (row + 2 < Constants.numberOfRows) {
+         rowPlusTwo = true;
+         grid[row + 2][col].isAlive = true;
+     }
+
+     // set [row + 2][col + 1] to alive
+     if (rowPlusTwo == true && colPlusOne == true) {
+         grid[row + 2][col + 1].isAlive = true;
+     }
+
+     // set [row + 2][col + 2] to alive
+     if (rowPlusTwo == true && colPlusTwo == true) {
+         grid[row + 2][col + 2].isAlive = true;
+     }
+ }
+
 }
