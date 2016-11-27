@@ -290,6 +290,7 @@ function evolveStep(grid) {
 function drawPattern(patternName, grid, row, col) {
   drawStillLife(patternName, grid, row, col);
   drawOscillator(patternName, grid, row, col);
+  drawSpaceship(patternName, grid, row, col);
 }
 
 /**
@@ -741,7 +742,7 @@ function drawSpaceship(patternName, grid, row, col) {
      // set [row][col + 1] to alive
      if (col + 1 < Constants.numberOfColumns) {
          colPlusOne = true;
-         grid[row][col + 1].isAlive = true;
+         setCellState("alive", grid, row, col+1);
      }
 
      // check [col + 2] is valid
@@ -752,25 +753,25 @@ function drawSpaceship(patternName, grid, row, col) {
      // set [row + 1][col + 2] to alive
      if (row + 1 < Constants.numberOfRows) {
          rowPlusOne = true;
-             if (colPlusTwo == true) {
-                 grid[row + 1][col + 2].isAlive = true;
+             if (colPlusTwo) {
+                 setCellState("alive", grid, row+1, col+2);
              }
      }
 
      // set [row + 2][col] to alive
      if (row + 2 < Constants.numberOfRows) {
          rowPlusTwo = true;
-         grid[row + 2][col].isAlive = true;
+         setCellState("alive", grid, row+2, col);
      }
 
      // set [row + 2][col + 1] to alive
-     if (rowPlusTwo == true && colPlusOne == true) {
-         grid[row + 2][col + 1].isAlive = true;
+     if (rowPlusTwo && colPlusOne) {
+        setCellState("alive", grid, row+2, col+1);
      }
 
      // set [row + 2][col + 2] to alive
-     if (rowPlusTwo == true && colPlusTwo == true) {
-         grid[row + 2][col + 2].isAlive = true;
+     if (rowPlusTwo && colPlusTwo) {
+         setCellState("alive", grid, row+2, col+2);
      }
  }
 
