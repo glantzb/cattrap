@@ -404,10 +404,10 @@ function drawStillLife(patternName, grid, row, col) {
     if (patternName == "Blinker") {
     	grid[row][col].isAlive = true;
     	if (row + 1 < Constants.numberOfRows){
-    		grid[row + 1][col].isAlive = true; 
+    		setCellState("alive", grid, row + 1, col);
     	}
     	if (row + 2 < Constants.numberOfRows){
-    		grid[row + 2][col].isAlive = true; 
+    		setCellState("alive", grid, row + 2, col); 
     	}
     }
 
@@ -422,30 +422,30 @@ function drawStillLife(patternName, grid, row, col) {
 
         if (row + 1 < Constants.numberOfRows){
         	rowPlusOne = true;
-        	grid[row + 1][col].isAlive = true;
+        	setCellState("alive", grid, row + 1, col);
         }
         if (row + 2 < Constants.numberOfRows){
         	rowPlusTwo = true;
         }
         if (col + 1 < Constants.numberOfColumns){
         	colPlusOne = true;
-        	grid[row][col + 1].isAlive = true;
+        	setCellState("alive", grid, row, col + 1);
         }
         if (col + 2 < Constants.numberOfColumns){
         	colPlusTwo = true;
-        	grid[row][col + 2].isAlive = true;
+        	setCellState("alive", grid, row + 2, col);
         }
         if (col + 3 < Constants.numberOfColumns){
         	colPlusThree = true;
         }
         if (colPlusThree && rowPlusOne){
-        	grid[row + 1][col + 3].isAlive = true;
+        	setCellState("alive", grid, row + 1, col + 3);
         }
         if (rowPlusTwo && colPlusOne){
-        	grid[row + 2][col + 1].isAlive = true;
+        	setCellState("alive", grid, row + 2, col + 1);
         }
         if (rowPlusTwo && colPlusTwo){
-        	grid[row + 2][col + 2].isAlive = true;
+        	setCellState("alive", grid, row + 2, col + 2);
         }
     }
 
@@ -462,7 +462,7 @@ function drawStillLife(patternName, grid, row, col) {
 
         if (col + 1 < Constants.numberOfColumns){
         	colPlusOne = true;
-        	grid[row][col + 1].isAlive = true;
+        	setCellState("alive", grid, row, col + 1);
         }
         if (col + 2 < Constants.numberOfColumns){
         	colPlusTwo = true;
@@ -472,35 +472,34 @@ function drawStillLife(patternName, grid, row, col) {
         }
         if (col + 4 < Constants.numberOfColumns){
         	colPlusFour = true;
-        	grid[row][col + 4].isAlive = true;
+        	setCellState("alive", grid, row, col + 4);
         }
         if (row + 1 < Constants.numberOfRows){
         	rowPlusOne = true;
-        	grid[row + 1][col].isAlive = true;
+        	setCellState("alive", grid, row + 1, col);
         }
         if (row + 2 < Constants.numberOfRows){
         	rowPlusTwo = true;
-        	grid[row + 2][col].isAlive = true;
+        	setCellState("alive", grid, row + 2, col);
         }
         if (row + 3 < Constants.numberOfRows){
         	rowPlusThree = true;
-        	grid[row + 3][col].isAlive = true;
+        	setCellState("alive", grid, row + 3, col);
         }
 
         if (rowPlusThree && colPlusOne){
-        	grid[row + 3][col + 1].isAlive = true;
+        	setCellState("alive", grid, row + 3, col + 3);
         }
         if (rowPlusThree && colPlusTwo){
-        	grid[row + 3][col + 2].isAlive = true;
+        	setCellState("alive", grid, row + 3, col + 2);
         }
         if (rowPlusThree && colPlusThree){
-        	grid[row + 3][col + 3].isAlive = true;
+        	setCellState("alive", grid, row + 3, col + 3);
         }
         if (rowPlusTwo && colPlusFour){
-        	grid[row + 2][col + 4].isAlive = true;
+        	setCellState("alive", grid, row + 2, col + 4);
         }
     }
-
 }
 
 
