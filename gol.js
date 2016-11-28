@@ -455,7 +455,7 @@ function drawOscillator(patternName, grid, row, col) {
  //Blinker
 
     if (patternName == "Blinker") {
-    	grid[row][col].isAlive = true;
+    	setCellState("alive", grid, row, col);
     	if (row + 1 < Constants.numberOfRows){
     		setCellState("alive", grid, row + 1, col);
     	}
