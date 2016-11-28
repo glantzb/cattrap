@@ -826,7 +826,7 @@ function drawSpaceship(patternName, grid, row, col) {
 
 //LWSS
 
-    if (patternName == "LWSS") {
+    if (patternName == "Lwss") {
         var colPlusOne = false;
         var colPlusTwo = false;
         var colPlusThree = false;
