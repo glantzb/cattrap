@@ -433,7 +433,7 @@ function drawStillLife(patternName, grid, row, col) {
         }
         if (col + 2 < Constants.numberOfColumns){
         	colPlusTwo = true;
-        	setCellState("alive", grid, row + 2, col);
+        	setCellState("alive", grid, row, col + 2);
         }
         if (col + 3 < Constants.numberOfColumns){
         	colPlusThree = true;
