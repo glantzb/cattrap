@@ -399,6 +399,107 @@ function drawStillLife(patternName, grid, row, col) {
        }
      }
   }
+//Blinker
+
+    if (patternName == "Blinker") {
+    	grid[row][col].isAlive = true;
+    	if (row + 1 < Constants.numberOfRows){
+    		grid[row + 1][col].isAlive = true; 
+    	}
+    	if (row + 2 < Constants.numberOfRows){
+    		grid[row + 2][col].isAlive = true; 
+    	}
+    }
+
+//Beehive
+
+    if (patternName == "Beehive") {
+        var colPlusOne = false;
+        var colPlusTwo = false;
+        var colPlusThree = false;
+        var rowPlusOne = false;
+        var rowPlusTwo = false;
+
+        if (row + 1 < Constants.numberOfRows){
+        	rowPlusOne = true;
+        	grid[row + 1][col].isAlive = true;
+        }
+        if (row + 2 < Constants.numberOfRows){
+        	rowPlusTwo = true;
+        }
+        if (col + 1 < Constants.numberOfColumns){
+        	colPlusOne = true;
+        	grid[row][col + 1].isAlive = true;
+        }
+        if (col + 2 < Constants.numberOfColumns){
+        	colPlusTwo = true;
+        	grid[row][col + 2].isAlive = true;
+        }
+        if (col + 3 < Constants.numberOfColumns){
+        	colPlusThree = true;
+        }
+        if (colPlusThree && rowPlusOne){
+        	grid[row + 1][col + 3].isAlive = true;
+        }
+        if (rowPlusTwo && colPlusOne){
+        	grid[row + 2][col + 1].isAlive = true;
+        }
+        if (rowPlusTwo && colPlusTwo){
+        	grid[row + 2][col + 2].isAlive = true;
+        }
+    }
+
+//LWSS
+
+    if (patternName == "LWSS") {
+        var colPlusOne = false;
+        var colPlusTwo = false;
+        var colPlusThree = false;
+        var colPlusFour = false;
+        var rowPlusOne = false;
+        var rowPlusTwo = false;
+        var rowPlusThree = false;
+
+        if (col + 1 < Constants.numberOfColumns){
+        	colPlusOne = true;
+        	grid[row][col + 1].isAlive = true;
+        }
+        if (col + 2 < Constants.numberOfColumns){
+        	colPlusTwo = true;
+        }
+        if (col + 3 < Constants.numberOfColumns){
+        	colPlusThree = true;
+        }
+        if (col + 4 < Constants.numberOfColumns){
+        	colPlusFour = true;
+        	grid[row][col + 4].isAlive = true;
+        }
+        if (row + 1 < Constants.numberOfRows){
+        	rowPlusOne = true;
+        	grid[row + 1][col].isAlive = true;
+        }
+        if (row + 2 < Constants.numberOfRows){
+        	rowPlusTwo = true;
+        	grid[row + 2][col].isAlive = true;
+        }
+        if (row + 3 < Constants.numberOfRows){
+        	rowPlusThree = true;
+        	grid[row + 3][col].isAlive = true;
+        }
+
+        if (rowPlusThree && colPlusOne){
+        	grid[row + 3][col + 1].isAlive = true;
+        }
+        if (rowPlusThree && colPlusTwo){
+        	grid[row + 3][col + 2].isAlive = true;
+        }
+        if (rowPlusThree && colPlusThree){
+        	grid[row + 3][col + 3].isAlive = true;
+        }
+        if (rowPlusTwo && colPlusFour){
+        	grid[row + 2][col + 4].isAlive = true;
+        }
+    }
 
 }
 
