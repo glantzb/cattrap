@@ -399,17 +399,6 @@ function drawStillLife(patternName, grid, row, col) {
        }
      }
   }
-//Blinker
-
-    if (patternName == "Blinker") {
-    	grid[row][col].isAlive = true;
-    	if (row + 1 < Constants.numberOfRows){
-    		setCellState("alive", grid, row + 1, col);
-    	}
-    	if (row + 2 < Constants.numberOfRows){
-    		setCellState("alive", grid, row + 2, col); 
-    	}
-    }
 
 //Beehive
 
@@ -448,58 +437,6 @@ function drawStillLife(patternName, grid, row, col) {
         	setCellState("alive", grid, row + 2, col + 2);
         }
     }
-
-//LWSS
-
-    if (patternName == "LWSS") {
-        var colPlusOne = false;
-        var colPlusTwo = false;
-        var colPlusThree = false;
-        var colPlusFour = false;
-        var rowPlusOne = false;
-        var rowPlusTwo = false;
-        var rowPlusThree = false;
-
-        if (col + 1 < Constants.numberOfColumns){
-        	colPlusOne = true;
-        	setCellState("alive", grid, row, col + 1);
-        }
-        if (col + 2 < Constants.numberOfColumns){
-        	colPlusTwo = true;
-        }
-        if (col + 3 < Constants.numberOfColumns){
-        	colPlusThree = true;
-        }
-        if (col + 4 < Constants.numberOfColumns){
-        	colPlusFour = true;
-        	setCellState("alive", grid, row, col + 4);
-        }
-        if (row + 1 < Constants.numberOfRows){
-        	rowPlusOne = true;
-        	setCellState("alive", grid, row + 1, col);
-        }
-        if (row + 2 < Constants.numberOfRows){
-        	rowPlusTwo = true;
-        	setCellState("alive", grid, row + 2, col);
-        }
-        if (row + 3 < Constants.numberOfRows){
-        	rowPlusThree = true;
-        	setCellState("alive", grid, row + 3, col);
-        }
-
-        if (rowPlusThree && colPlusOne){
-        	setCellState("alive", grid, row + 3, col + 3);
-        }
-        if (rowPlusThree && colPlusTwo){
-        	setCellState("alive", grid, row + 3, col + 2);
-        }
-        if (rowPlusThree && colPlusThree){
-        	setCellState("alive", grid, row + 3, col + 3);
-        }
-        if (rowPlusTwo && colPlusFour){
-        	setCellState("alive", grid, row + 2, col + 4);
-        }
-    }
 }
 
 
@@ -515,7 +452,19 @@ function drawStillLife(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawOscillator(patternName, grid, row, col) {
-  if (patternName == "Toad") {
+ //Blinker
+
+    if (patternName == "Blinker") {
+    	grid[row][col].isAlive = true;
+    	if (row + 1 < Constants.numberOfRows){
+    		setCellState("alive", grid, row + 1, col);
+    	}
+    	if (row + 2 < Constants.numberOfRows){
+    		setCellState("alive", grid, row + 2, col); 
+    	}
+    }
+    
+    if (patternName == "Toad") {
       var colPlusOne = false;
       var colPlusTwo = false;
       var colPlusThree = false;
@@ -874,5 +823,57 @@ function drawSpaceship(patternName, grid, row, col) {
          setCellState("alive", grid, row+2, col+2);
      }
  }
+
+//LWSS
+
+    if (patternName == "LWSS") {
+        var colPlusOne = false;
+        var colPlusTwo = false;
+        var colPlusThree = false;
+        var colPlusFour = false;
+        var rowPlusOne = false;
+        var rowPlusTwo = false;
+        var rowPlusThree = false;
+
+        if (col + 1 < Constants.numberOfColumns){
+        	colPlusOne = true;
+        	setCellState("alive", grid, row, col + 1);
+        }
+        if (col + 2 < Constants.numberOfColumns){
+        	colPlusTwo = true;
+        }
+        if (col + 3 < Constants.numberOfColumns){
+        	colPlusThree = true;
+        }
+        if (col + 4 < Constants.numberOfColumns){
+        	colPlusFour = true;
+        	setCellState("alive", grid, row, col + 4);
+        }
+        if (row + 1 < Constants.numberOfRows){
+        	rowPlusOne = true;
+        	setCellState("alive", grid, row + 1, col);
+        }
+        if (row + 2 < Constants.numberOfRows){
+        	rowPlusTwo = true;
+        	setCellState("alive", grid, row + 2, col);
+        }
+        if (row + 3 < Constants.numberOfRows){
+        	rowPlusThree = true;
+        	setCellState("alive", grid, row + 3, col);
+        }
+
+        if (rowPlusThree && colPlusOne){
+        	setCellState("alive", grid, row + 3, col + 3);
+        }
+        if (rowPlusThree && colPlusTwo){
+        	setCellState("alive", grid, row + 3, col + 2);
+        }
+        if (rowPlusThree && colPlusThree){
+        	setCellState("alive", grid, row + 3, col + 3);
+        }
+        if (rowPlusTwo && colPlusFour){
+        	setCellState("alive", grid, row + 2, col + 4);
+        }
+    }
 
 }
