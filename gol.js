@@ -863,7 +863,7 @@ function drawSpaceship(patternName, grid, row, col) {
         }
 
         if (rowPlusThree && colPlusOne){
-        	setCellState("alive", grid, row + 3, col + 3);
+        	setCellState("alive", grid, row + 3, col + 1);
         }
         if (rowPlusThree && colPlusTwo){
         	setCellState("alive", grid, row + 3, col + 2);
