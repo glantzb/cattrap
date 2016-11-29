@@ -154,15 +154,15 @@ else {
  */
 function countLiveNeighbors(grid, row, col) {
   var livers = 0;
-    var tl;
-    var tm;
-    var tr;
-    var ml;
-    var mm;
-    var mr;
-    var bl;
-    var bm;
-    var br;
+    var tl = true;
+    var tm = true;
+    var tr = true;
+    var ml = true;
+    var mm = true;
+    var mr = true;
+    var bl = true;
+    var bm = true;
+    var br = true;
 
     if (row - 1 < 0) {
     tl = false;
