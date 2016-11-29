@@ -112,8 +112,15 @@ $(document).ready(function() {
         clearTimeout(timer);
     });
 
-    // TODO: Add a click event listener for your clear button here.
-    //       Do not modify any code above this!
+    $("#clear-grid").click(function () {
+      for (var i = 0; i < Constants.numberOfRows; i++) {
+          for (var j = 0; j < Constants.numberOfColumns; j++) {
+            gameGrid[i][j].isAlive = false;
+            getCanvasCellAtIndex(i, j).css("backgroundColor", "#ffffff");
+          }
+    }
+    });
+
 })
 
 
