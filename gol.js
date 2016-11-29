@@ -328,11 +328,8 @@ function drawPattern(patternName, grid, row, col) {
  */
 function drawStillLife(patternName, grid, row, col) {
     
-    // block
+  // block
   if (patternName == "Block"){
-  var colPlusOne = false;
-  var rowPlusOne = false;
-
 
   // set [row][col] to alive
   if (col < Constants.numberOfColumns) {
@@ -353,10 +350,7 @@ function drawStillLife(patternName, grid, row, col) {
   if (row + 1 < Constants.numberOfRows) {
     setCellState("alive", grid, row + 1, col);
   }
-
-  }
-    
-    
+} 
     
   if (patternName == "Loaf") {
      var colPlusOne = false;
