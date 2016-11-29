@@ -814,8 +814,6 @@ function drawOscillator(patternName, grid, row, col) {
   }
 
 
-}
-
 // Beacon
   if (patternName == "Beacon") {
 
@@ -840,25 +838,26 @@ function drawOscillator(patternName, grid, row, col) {
           }
 
           // set [row + 2][col + 2] to alive
-          if ((col + 2 < Constants.numberOfColumns && row) && (row + 2 < Constants.numberOfColumns)) {
+          if ((col + 2 < Constants.numberOfColumns) && (row + 2 < Constants.numberOfColumns)) {
             setCellState("alive", grid, row + 2, col + 2);
           }
 
           // set [row + 2][col + 3] to alive
-          if ((col + 3 < Constants.numberOfColumns && row) && (row + 2 < Constants.numberOfColumns)) {
+          if ((col + 3 < Constants.numberOfColumns) && (row + 2 < Constants.numberOfColumns)) {
             setCellState("alive", grid, row + 2, col + 3);
           }
 
           // set [row + 3][col + 2] to alive
-          if ((col + 2 < Constants.numberOfColumns && row) && (row + 3 < Constants.numberOfColumns)) {
+          if ((col + 2 < Constants.numberOfColumns) && (row + 3 < Constants.numberOfColumns)) {
             setCellState("alive", grid, row + 3, col + 2);
           }
 
           // set [row + 3][col + 3] to alive
-          if ((col + 3 < Constants.numberOfColumns && row) && (row + 3 < Constants.numberOfColumns)) {
+          if ((col + 3 < Constants.numberOfColumns) && (row + 3 < Constants.numberOfColumns)) {
             setCellState("alive", grid, row + 3, col + 3);
           }
- }
+     }
+}
 
 
 
