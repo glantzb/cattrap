@@ -138,7 +138,7 @@ function setCellState(state, grid, row, col) {
 
 else {
   grid[row][col].isAlive = false;
-  getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.aliveColor);
+  getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.deadColor);
 }
 }
 
