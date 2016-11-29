@@ -261,7 +261,26 @@ function updateLiveNeighbors(grid) {
  *           liveNeighbors each cell has, and to the rules of the Game of Life.
  */
 function updateCells(grid) {
-    // TODO: implement
+    for (var i = 0; i < Constants.numberOfRows; i++) {
+        for (var j = 0; j < Constants.numberOfColumns; j++) {
+            if (grid[i][j].isAlive) {
+                if (grid[i][j].liveNeighbors < 2) {
+                    setCellState("dead", grid, i, j);
+                }
+                else if (grid[i][j].liveNeighbors < 4) {
+                    setCellState("alive", grid, i, j);
+                }
+                else if (grid[i][j].liveNeighbors > 3) {
+                    setCellState("dead", grid, i, j);
+                }
+            }
+            else {
+                if (grid[i][j].liveNeighbors == 3) {
+                    setCellState("alive", grid, i, j);
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -273,7 +292,10 @@ function updateCells(grid) {
  *           proceeding to change the state of all cells.
  */
 function evolveStep(grid) {
-    // TODO: implement
+    
+    updateLiveNeighbors(grid);
+    
+    updateCells(grid);
 }
 
 /**
