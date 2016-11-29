@@ -154,15 +154,15 @@ else {
  */
 function countLiveNeighbors(grid, row, col) {
   var livers = 0;
-    var tl = true;
-    var tm = true;
-    var tr = true;
-    var ml = true;
-    var mm = true;
-    var mr = true;
-    var bl = true;
-    var bm = true;
-    var br = true;
+    var tl;
+    var tm;
+    var tr;
+    var ml;
+    var mm;
+    var mr;
+    var bl;
+    var bm;
+    var br;
 
     if (row - 1 < 0) {
     tl = false;
@@ -190,49 +190,49 @@ function countLiveNeighbors(grid, row, col) {
 
     if (tl) {
         if (grid[row - 1][col - 1].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (tm) {
         if (grid[row - 1][col].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (tr) {
         if (grid[row - 1][col + 1].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (mr) {
         if (grid[row][col + 1].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (br) {
         if (grid[row + 1][col + 1].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (bm) {
         if (grid[row + 1][col].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (bl) {
         if (grid[row + 1][col - 1].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
     if (ml) {
         if (grid[row][col - 1].isAlive == true) {
-        livers++;
+        livers++
         }
     }
 
@@ -327,6 +327,37 @@ function drawPattern(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawStillLife(patternName, grid, row, col) {
+    
+    // block
+  if (patternName == "Block"){
+  var colPlusOne = false;
+  var rowPlusOne = false;
+
+
+  // set [row][col] to alive
+  if (col < Constants.numberOfColumns) {
+    setCellState("alive", grid, row, col);
+  }
+
+  // set [row][col + 1] to alive
+  if (col + 1 < Constants.numberOfColumns) {
+    setCellState("alive", grid, row, col + 1);
+  }
+
+  // set [row + 1][col + 1] to alive
+  if ((col + 1 < Constants.numberOfColumns) && (row + 1 < Constants.numberOfColumns)) {
+    setCellState("alive", grid, row + 1, col + 1);
+  }
+
+  // set [row + 1][col] to alive
+  if (row + 1 < Constants.numberOfRows) {
+    setCellState("alive", grid, row + 1, col);
+  }
+
+  }
+    
+    
+    
   if (patternName == "Loaf") {
      var colPlusOne = false;
      var colPlusTwo = false;
@@ -474,7 +505,56 @@ function drawStillLife(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawOscillator(patternName, grid, row, col) {
- //Blinker
+ 
+    // Beacon
+  if (patternName == "Beacon") {
+
+          // set [row][col] to alive
+          if (col < Constants.numberOfColumns) {
+            setCellState("alive", grid, row, col);
+          }
+
+          // set [row][col + 1] to alive
+          if (col + 1 < Constants.numberOfColumns) {
+            setCellState("alive", grid, row, col + 1);
+          }
+
+          // set [row + 1][col + 1] to alive
+          if ((col + 1 < Constants.numberOfColumns) && (row + 1 < Constants.numberOfColumns)) {
+            setCellState("alive", grid, row + 1, col + 1);
+          }
+
+          // set [row + 1][col] to alive
+          if (row + 1 < Constants.numberOfRows) {
+            setCellState("alive", grid, row + 1, col);
+          }
+
+          // set [row + 2][col + 2] to alive
+          if ((col + 2 < Constants.numberOfColumns && row) && (row + 2 < Constants.numberOfColumns)) {
+            setCellState("alive", grid, row + 2, col + 2);
+          }
+
+          // set [row + 2][col + 3] to alive
+          if ((col + 3 < Constants.numberOfColumns && row) && (row + 2 < Constants.numberOfColumns)){
+            setCellState("alive", grid, row + 2, col + 3);
+          }
+
+          // set [row + 3][col + 2] to alive
+          if ((col + 2 < Constants.numberOfColumns && row) && (row + 3 < Constants.numberOfColumns)) {
+            setCellState("alive", grid, row + 3, col + 2);
+          }
+
+          // set [row + 3][col + 3] to alive
+          if ((col + 3 < Constants.numberOfColumns && row) && (row + 3 < Constants.numberOfColumns)) {
+            setCellState("alive", grid, row + 3, col + 3);
+          }
+    }  
+    
+    
+    
+    
+    
+  //Blinker
 
     if (patternName == "Blinker") {
     	setCellState("alive", grid, row, col);
