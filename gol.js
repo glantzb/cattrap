@@ -132,14 +132,14 @@ $(document).ready(function() {
  */
 function setCellState(state, grid, row, col) {
   if (state == "alive") {
-  grid[row][col].isAlive = true;
-  getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.aliveColor);
-}
+        grid[row][col].isAlive = true;
+        getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.aliveColor);
+  }
 
-else {
-  grid[row][col].isAlive = false;
-  getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.deadColor);
-}
+    else {
+        grid[row][col].isAlive = false;
+        getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.deadColor);
+    }
 }
 
 
@@ -235,7 +235,7 @@ function countLiveNeighbors(grid, row, col) {
         livers++;
         }
     }
-
+    return livers;
 }
 
 
