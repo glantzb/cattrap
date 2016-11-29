@@ -327,6 +327,31 @@ function drawPattern(patternName, grid, row, col) {
  *           without going outside the boundaries of the canvas.
  */
 function drawStillLife(patternName, grid, row, col) {
+    
+// block
+  if (patternName == "Block"){
+
+  // set [row][col] to alive
+  if (col < Constants.numberOfColumns) {
+    setCellState("alive", grid, row, col);
+  }
+
+  // set [row][col + 1] to alive
+  if (col + 1 < Constants.numberOfColumns) {
+    setCellState("alive", grid, row, col + 1);
+  }
+
+  // set [row + 1][col + 1] to alive
+  if ((col + 1 < Constants.numberOfColumns) && (row + 1 < Constants.numberOfColumns)) {
+    setCellState("alive", grid, row + 1, col + 1);
+  }
+
+  // set [row + 1][col] to alive
+  if (row + 1 < Constants.numberOfRows) {
+    setCellState("alive", grid, row + 1, col);
+  }
+}
+   
   if (patternName == "Loaf") {
      var colPlusOne = false;
      var colPlusTwo = false;
