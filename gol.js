@@ -190,49 +190,49 @@ function countLiveNeighbors(grid, row, col) {
 
     if (tl) {
         if (grid[row - 1][col - 1].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (tm) {
         if (grid[row - 1][col].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (tr) {
         if (grid[row - 1][col + 1].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (mr) {
         if (grid[row][col + 1].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (br) {
         if (grid[row + 1][col + 1].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (bm) {
         if (grid[row + 1][col].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (bl) {
         if (grid[row + 1][col - 1].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
     if (ml) {
         if (grid[row][col - 1].isAlive == true) {
-        livers++
+        livers++;
         }
     }
 
