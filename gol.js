@@ -570,7 +570,7 @@ function drawOscillator(patternName, grid, row, col) {
     var colPlusEight = false;
     var colPlusNine = false;
     var colPlusTen = false;
-    var colPlusTweleve = false;
+    var colPlusTwelve = false;
     var rowPlusTwo = false;
     var rowPlusThree = false;
     var rowPlusFour = false;
