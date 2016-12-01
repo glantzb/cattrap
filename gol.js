@@ -12,9 +12,7 @@ var Constants = {
     numberOfRows: 20,
     numberOfColumns: 40,
     cellSize: 20,
-    aliveColor: "#2ecc71",
-    deadColor: "#e74c3c",
-    generationInterval: 0.5,
+    clickedColor: "#2ecc71",
 };
 
 
@@ -65,8 +63,7 @@ function createGameGrid() {
         grid[row] = new Array(Constants.numberOfColumns);
         for (var col = 0; col < Constants.numberOfColumns; col++) {
             grid[row][col] = {
-                isAlive: false,
-                liveNeighbors: 0,
+                isClicked: false,
             };
         }
     }
@@ -81,44 +78,9 @@ $(document).ready(function() {
     createCanvas();
     var gameGrid = createGameGrid();
 
-    $("#still-life-btn, #oscillator-btn, #spaceship-btn").click(function () {
-        var selector = $(this).attr("id");
-        selector = "#" + selector.replace("btn", "select");
-        var pattern = $(selector).val();
-        var newRow = Math.floor(Math.random() * Constants.numberOfRows);
-        var newCol = Math.floor(Math.random() * Constants.numberOfColumns);
-        drawPattern(pattern, gameGrid, newRow, newCol);
-    });
-
-    // event loop
-    var isRunning = false;
-    var timer;
-    function runGoL() {
-        if (!isRunning) {
-            isRunning = true;
-            evolveStep(gameGrid);
-            // wait to run again
-            timer = setTimeout(function() {
-                isRunning = false;
-                runGoL();
-            }, Constants.generationInterval * 1000);
-        }
-    }
-    $("#start-game").click(function () {
-        runGoL();
-    });
-    $("#stop-game").click(function () {
-        isRunning = false;
-        clearTimeout(timer);
-    });
-
-    $("#clear-grid").click(function () {
-      for (var i = 0; i < Constants.numberOfRows; i++) {
-          for (var j = 0; j < Constants.numberOfColumns; j++) {
-            gameGrid[i][j].isAlive = false;
-            getCanvasCellAtIndex(i, j).css("backgroundColor", "#ffffff");
-          }
-    }
+    $( "#td" ).click(function() {
+        getCanvasCellAtIndex(row, col).css("backgroundColor", Constants.clickedColor));
+        grid[row][col].isClicked = true;
     });
 
 })
