@@ -122,3 +122,18 @@ $(document).ready(function() {
     });
 
 })
+
+function addRowHandlers() {
+    var table = document.getElementById("tableId");
+    var rows = table.getElementsByTagName("tr");
+    for (i = 1; i < rows.length; i++) {
+        var row = table.rows[i];
+        row.onclick = function(myrow){
+                          return function() { 
+                             var cell = myrow.getElementsByTagName("td")[0];
+                             var id = cell.innerHTML;
+                             alert("id:" + id);
+                      };
+                  }(row);
+    }
+}
